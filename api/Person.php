@@ -60,7 +60,7 @@ class Person {
                 return $stmt->fetchAll(\PDO::FETCH_ASSOC);
             }
         } else if ($this->getId() > 0) {
-            $stmt = $conn->prepare("SELECT * FROM person WHERE id = :_id");
+            $stmt = $conn->prepare("SELECT * FROM person WHERE id = :_id ORDER BY `person`.`id` DESC");
             $stmt->bindValue(":_id", $this->getId(), \PDO::PARAM_INT);
             
             if ($stmt->execute()) {
