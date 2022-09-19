@@ -6,7 +6,7 @@ header("Access-Control-Allow-Origin: *");
 
 $data = [];
 
-$fn     = $_REQUEST["fn"] ?? null;
+$fn     = $_REQUEST["fn"]   ?? null;
 $id     = $_REQUEST["id"]   ?? 0;
 $name   = $_REQUEST["name"] ?? null;
 $age    = $_REQUEST["age"]  ?? null;

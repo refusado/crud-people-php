@@ -1,13 +1,29 @@
-const BASE_URL = 'http://localhost/api-crud/';
+const BASE_URL = 'http://localhost/people-crud/api/';
 
 const createBtn = document.getElementById('btnCreate');
 const readBtn = document.getElementById('btnRead');
 const updateBtn = document.getElementById('btnUpdate');
 const deleteBtn = document.getElementById('btnDelete');
 
+const table = document.getElementById('bodyTable');
+
+function createTableLine(id, name, age) {
+    const PARAM = [id, name, age];
+
+    const line = document.createElement('tr');
+    PARAM.forEach(e => {
+        const col = document.createElement('td');
+        const content = document.createTextNode(e);;
+        line.appendChild(col);
+        col.appendChild(content);
+        table.appendChild(line);
+    });
+}
+
+createTableLine(63, 'arroz', 139);
+
 createBtn.addEventListener('click', () => {
     createPerson('Marcos Vilela', 51);
-    console.log('usuário criado');
 });
 
 readBtn.addEventListener('click', readPersons);
@@ -35,8 +51,12 @@ async function readPersons() {
         .then(response => response.json())
         .then(data => {
             console.log(data.person);
+            return data.person;
         });
 
+    result.forEach(e => {
+        createTableLine(e.id, e.name, e.age);
+    })
     return result;
 }
 
