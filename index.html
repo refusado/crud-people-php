@@ -36,23 +36,23 @@
     </style>
 </head>
 <body>
-    <div id="buttons">
+    <!-- <div id="buttons">
         <button id="btnCreate">Create</button>
         <button id="btnRead">Read</button>
         <button id="btnUpdate">Update</button>
-        <button id="btnDelete">Delete</button>
-    </div>
+        <button id="btnDelete">Delete all</button>
+    </div> -->
 
-    <hr>
+    <!-- <hr> -->
 
     <form class="form" id="crudForm" action="">
-        <input type="text" name="Name" id="nameInput" placeholder="Name">
-        <input type="number" name="Age" id="ageInput" placeholder="Age"><br>
+        <input type="text" name="Name" id="nameInput" placeholder="Name" value="Default">
+        <input type="number" name="Age" id="ageInput" placeholder="Age" value=14><br>
         <input type="submit" value="Create">
     </form>
-        
-    <hr>
+    <button style="margin: 20px auto; display:block" id="btnDelete">Delete all</button>
 
+    <p style="text-align: center">Total: <span id="personsCount"></span></p>
     <table class="table border">
         <thead class="border">
             <tr>

@@ -54,13 +54,13 @@ class Person {
         $conn = $this->connection();
 
         if ($this->getId() === 0) {
-            $stmt = $conn->prepare("SELECT * FROM person");
+            $stmt = $conn->prepare("SELECT * FROM person ORDER BY `person`.`id` DESC");
             
             if ($stmt->execute()) {
                 return $stmt->fetchAll(\PDO::FETCH_ASSOC);
             }
         } else if ($this->getId() > 0) {
-            $stmt = $conn->prepare("SELECT * FROM person WHERE id = :_id ORDER BY `person`.`id` DESC");
+            $stmt = $conn->prepare("SELECT * FROM person WHERE id = :_id");
             $stmt->bindValue(":_id", $this->getId(), \PDO::PARAM_INT);
             
             if ($stmt->execute()) {
@@ -99,5 +99,17 @@ class Person {
         }
 
         return[];
+    }
+
+    public function count() {
+
+        $conn = $this->connection();
+        $stmt = $conn->prepare("SELECT COUNT(*) FROM person");
+            
+        if ($stmt->execute()) {
+            return $stmt->fetchColumn();
+        }
+
+        return false;
     }
 }

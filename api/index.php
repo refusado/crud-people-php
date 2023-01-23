@@ -34,4 +34,8 @@ if ($fn === "delete" && $id > 0) {
     $data["person"] = $person->delete();
 }
 
+if ($fn === "count") {
+    $data["totalPersons"] = $person->count();
+}
+
 die(json_encode($data));
