@@ -1,15 +1,16 @@
 <?php
+namespace api\app;
 
-require 'config/Database.php';
+use api\config\Database;
 
-class DatabaseConnection
+class Connection
 {
     public static function start(): \PDO
     {
         $conn = "mysql";
-        $conn .= ":host=" . DB_HOST;
-        $conn .= ";dbname=" . DB_NAME;
+        $conn .= ":host=" . Database::DB_HOST;
+        $conn .= ";dbname=" . Database::DB_NAME;
 
-        return new \PDO($conn, DB_USER, DB_PASS);
+        return new \PDO($conn, Database::DB_USER, Database::DB_PASS);
     }
 }

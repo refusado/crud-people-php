@@ -1,6 +1,7 @@
 <?php
 
-require_once "app/Person.php";
+require "../vendor/autoload.php";
+use api\app\Person;
 
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");

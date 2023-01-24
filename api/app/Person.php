@@ -1,6 +1,7 @@
 <?php
+namespace api\app;
 
-require "app/Connection.php";
+use api\app\Connection;
 
 class Person {
 
@@ -34,7 +35,7 @@ class Person {
 
     public function create(): array {
 
-        $conn = DatabaseConnection::start();
+        $conn = Connection::start();
         $stmt = $conn->prepare("INSERT INTO person VALUES (NULL, :_name, :_age)");
         $stmt->bindValue(":_name", $this->getName(), \PDO::PARAM_STR);
         $stmt->bindValue(":_age", $this->getAge(), \PDO::PARAM_INT);
@@ -49,7 +50,7 @@ class Person {
 
     public function read(): array {
 
-        $conn = DatabaseConnection::start();
+        $conn = Connection::start();
 
         if ($this->getId() === 0) {
             $stmt = $conn->prepare("SELECT * FROM person ORDER BY `person`.`id` DESC");
@@ -71,7 +72,7 @@ class Person {
 
     public function update(): array {
 
-        $conn = DatabaseConnection::start();
+        $conn = Connection::start();
         $stmt = $conn->prepare("UPDATE person SET name = :_name, age = :_age WHERE id = :_id");
         $stmt->bindValue(":_name", $this->getName(), \PDO::PARAM_STR);
         $stmt->bindValue(":_age", $this->getAge(), \PDO::PARAM_INT);
@@ -88,7 +89,7 @@ class Person {
 
         $person = $this->read();
 
-        $conn = DatabaseConnection::start();
+        $conn = Connection::start();
         $stmt = $conn->prepare("DELETE FROM person WHERE id = :_id");
         $stmt->bindValue(":_id", $this->getId(), \PDO::PARAM_INT);
 
@@ -101,7 +102,7 @@ class Person {
 
     public function count() {
 
-        $conn = DatabaseConnection::start();
+        $conn = Connection::start();
         $stmt = $conn->prepare("SELECT COUNT(*) FROM person");
             
         if ($stmt->execute()) {
