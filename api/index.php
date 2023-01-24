@@ -1,5 +1,6 @@
 <?php
-require_once "Person.php";
+
+require_once "app/Person.php";
 
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");

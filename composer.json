@@ -1,0 +1,12 @@
+{
+    "name": "refu/people-crud",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Renan",
+            "email": "orefusado@gmail.com"
+        }
+    ],
+    "require": {}
+}

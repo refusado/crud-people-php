@@ -1,5 +1,7 @@
 <?php
 
+require "app/Connection.php";
+
 class Person {
 
     private $id = 0;
@@ -30,13 +32,9 @@ class Person {
         return $this->age;
     }
 
-    private function connection(): \PDO {
-        return new \PDO("mysql:host=localhost;dbname=api_crud", "root", "");
-    }
-
     public function create(): array {
 
-        $conn = $this->connection();
+        $conn = DatabaseConnection::start();
         $stmt = $conn->prepare("INSERT INTO person VALUES (NULL, :_name, :_age)");
         $stmt->bindValue(":_name", $this->getName(), \PDO::PARAM_STR);
         $stmt->bindValue(":_age", $this->getAge(), \PDO::PARAM_INT);
@@ -51,7 +49,7 @@ class Person {
 
     public function read(): array {
 
-        $conn = $this->connection();
+        $conn = DatabaseConnection::start();
 
         if ($this->getId() === 0) {
             $stmt = $conn->prepare("SELECT * FROM person ORDER BY `person`.`id` DESC");
@@ -73,7 +71,7 @@ class Person {
 
     public function update(): array {
 
-        $conn = $this->connection();
+        $conn = DatabaseConnection::start();
         $stmt = $conn->prepare("UPDATE person SET name = :_name, age = :_age WHERE id = :_id");
         $stmt->bindValue(":_name", $this->getName(), \PDO::PARAM_STR);
         $stmt->bindValue(":_age", $this->getAge(), \PDO::PARAM_INT);
@@ -90,7 +88,7 @@ class Person {
 
         $person = $this->read();
 
-        $conn = $this->connection();
+        $conn = DatabaseConnection::start();
         $stmt = $conn->prepare("DELETE FROM person WHERE id = :_id");
         $stmt->bindValue(":_id", $this->getId(), \PDO::PARAM_INT);
 
@@ -103,7 +101,7 @@ class Person {
 
     public function count() {
 
-        $conn = $this->connection();
+        $conn = DatabaseConnection::start();
         $stmt = $conn->prepare("SELECT COUNT(*) FROM person");
             
         if ($stmt->execute()) {
