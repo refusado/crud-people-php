@@ -22,7 +22,7 @@ deleteBtn.addEventListener("click", () => {
                 const lastPerson = persons[0].id;
 
                 for (let i = lastPerson - personsNo; i <= lastPerson; i++) {
-                    deletePerson(i).then(updateTable);
+                    removeTableRow(i);
                 }
             });
         }
@@ -35,43 +35,50 @@ form.addEventListener('submit', e => {
     const age   = ageInput.value;
     
     if (name && age) {
-        createPerson(name, age).then(() => {
+        createPerson(name, age).then((res) => {
             // nameInput.value = '';
             // ageInput.value   = '';
 
-            updateTable();
+            const createdPerson = res[0];
+            createTableRow(createdPerson.id, createdPerson.name, createdPerson.age);
         });
     }
 })
 
+function createTableRow(id, name, age) {
+    const params = [id, name, age];
+    const row = document.createElement('tr');
+    row.id = `person${id}`;
 
-updateTable();
+    params.forEach(e => {
+        const col = document.createElement('td');
+        const content = document.createTextNode(e);;
+        row.appendChild(col);
+        col.appendChild(content);
+        table.appendChild(row);
+    });
+}
+
+function removeTableRow(id) {
+    const rowToDelete = document.getElementById(`person${id}`);
+
+    if (rowToDelete) {
+        table.removeChild(rowToDelete);
+        deletePerson(id);
+    }
+}
 
 function updateTable() {
     readPersons()
         .then(data => {
             while (table.firstChild) table.removeChild(table.firstChild);
 
-            data.forEach(e => createTableLine(e.id, e.name, e.age))
+            data.forEach(e => createTableRow(e.id, e.name, e.age))
         })
 
     countPersons()
         .then(number => countSpan.textContent = number)
 }
-
-function createTableLine(id, name, age) {
-    const params = [id, name, age];
-
-    const line = document.createElement('tr');
-    params.forEach(e => {
-        const col = document.createElement('td');
-        const content = document.createTextNode(e);;
-        line.appendChild(col);
-        col.appendChild(content);
-        table.appendChild(line);
-    });
-}
-
 
 async function createPerson(name, age) {
     const result = await fetch(`${BASE_URL}?fn=create&name=${name}&age=${age}`)
@@ -112,3 +119,6 @@ async function countPersons() {
 
     return result;
 }
+
+
+updateTable();
