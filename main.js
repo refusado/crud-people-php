@@ -31,18 +31,16 @@ deleteBtn.addEventListener("click", () => {
 
 form.addEventListener('submit', e => {
     e.preventDefault();
-    const name  = nameInput.value;
-    const age   = ageInput.value;
+    const name  = nameInput.value || "Default";
+    const age   = ageInput.value || 0;
     
-    if (name && age) {
-        createPerson(name, age).then((res) => {
-            // nameInput.value = '';
-            // ageInput.value   = '';
+    createPerson(name, age).then((response) => {
+        nameInput.value = '';
+        ageInput.value   = '';
 
-            const createdPerson = res[0];
-            createTableRow(createdPerson.id, createdPerson.name, createdPerson.age);
-        });
-    }
+        const { id, name, age } = response[0];
+        createTableRow(id, name, age);
+    });
 })
 
 function createTableRow(id, name, age) {
