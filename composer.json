@@ -8,9 +8,16 @@
             "email": "orefusado@gmail.com"
         }
     ],
+    "scripts": {
+        "standard": "vendor/bin/phpcbf --standard=PSR12 api/",
+        "standard-check": "vendor/bin/phpcs --standard=PSR12 api/"
+    },
     "autoload": {
         "psr-4": {
-            "api\\": "api/"
+            "Api\\": "api/"
         }
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.7"
     }
 }

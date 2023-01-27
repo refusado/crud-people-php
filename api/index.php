@@ -1,7 +1,7 @@
 <?php
 
 require "../vendor/autoload.php";
-use api\app\Person;
+use Api\App\Person;
 
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
@@ -13,7 +13,7 @@ $id     = $_REQUEST["id"]   ?? 0;
 $name   = $_REQUEST["name"] ?? null;
 $age    = $_REQUEST["age"]  ?? null;
 
-$person = new Person;
+$person = new Person();
 $person->setId($id);
 
 if ($fn === "create" && $name !== null && $age !== null) {

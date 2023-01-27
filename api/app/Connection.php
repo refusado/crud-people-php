@@ -1,7 +1,8 @@
 <?php
-namespace api\app;
 
-use api\config\Database;
+namespace Api\App;
+
+use Api\Config\Database;
 
 class Connection
 {
