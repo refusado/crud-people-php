@@ -47,6 +47,7 @@ function createTableRow(id, name, age) {
     const params = [id, name, age];
     const row = document.createElement('tr');
     row.id = `person${id}`;
+    countSpan.innerText++
 
     params.forEach(e => {
         const col = document.createElement('td');
@@ -55,6 +56,7 @@ function createTableRow(id, name, age) {
         col.appendChild(content);
         table.appendChild(row);
     });
+    
 }
 
 function removeTableRow(id) {
@@ -62,6 +64,7 @@ function removeTableRow(id) {
 
     if (rowToDelete) {
         table.removeChild(rowToDelete);
+        countSpan.innerText--
         deletePerson(id);
     }
 }

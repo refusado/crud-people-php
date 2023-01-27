@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP CRUD - People</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="./main.js" defer></script>
+</head>
+<body>
+    <form class="" id="crudForm" action="">
+        <input type="text" name="Name" id="nameInput" placeholder="Name">
+        <input type="number" name="Age" id="ageInput" placeholder="Age"><br>
+        <input type="submit" value="Create">
+    </form>
+    <button id="btnDelete">Delete all</button>
+
+    <p>Total: <span id="personsCount"></span></p>
+    <table class="">
+        <thead class="">
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Idade</th>
+            </tr>
+        </thead>
+        <tbody id="bodyTable">
+        </tbody>
+    </table>
+
+</body>
+</html>
