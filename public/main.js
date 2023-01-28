@@ -40,6 +40,7 @@ form.addEventListener('submit', e => {
 
         const { id, name, age } = response[0];
         createTableRow(id, name, age);
+        countSpan.innerText++;
     });
 })
 
@@ -47,7 +48,6 @@ function createTableRow(id, name, age) {
     const params = [id, name, age];
     const row = document.createElement('tr');
     row.id = `person${id}`;
-    countSpan.innerText++
 
     params.forEach(e => {
         const col = document.createElement('td');
@@ -64,8 +64,8 @@ function removeTableRow(id) {
 
     if (rowToDelete) {
         table.removeChild(rowToDelete);
-        countSpan.innerText--
-        deletePerson(id);
+        deletePerson(id)
+            .then(() => countSpan.innerText--);
     }
 }
 
