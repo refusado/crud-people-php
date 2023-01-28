@@ -2,6 +2,15 @@
   animation: pop 300ms forwards;
 }
 
+#delete-alert {
+  display: flex;
+  animation: pop 300ms forwards;
+}
+
+#delete-alert.hidden {
+  display: none;
+}
+
 @keyframes pop {
   0% {
     transform: scale(0);

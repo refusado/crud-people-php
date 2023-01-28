@@ -1,7 +1,10 @@
 const BASE_URL      = 'http://localhost/people-crud/api/';
 
 // const updateBtn   = document.getElementById('btnUpdate');
-const deleteBtn   = document.getElementById('btnDelete');
+const deleteBtn   = document.getElementById('delete-btn');
+const deleteAlert = document.getElementById('delete-alert');
+const deleteAll   = document.getElementById('delete-confirm');
+const deleteBack  = document.getElementById('delete-cancel');
 
 const table       = document.getElementById('bodyTable');
 const countSpan   = document.getElementById('personsCount');
@@ -16,6 +19,16 @@ const ageInput    = document.getElementById('ageInput');
 // });
 
 deleteBtn.addEventListener("click", () => {
+    deleteAlert.classList.toggle("hidden");
+});
+
+deleteBack.addEventListener("click", () => {
+    deleteAlert.classList.add("hidden");
+});
+
+deleteAll.addEventListener("click", () => {
+    deleteAlert.classList.add("hidden");
+
     countPersons().then((personsNo) => {
         if (personsNo) {
             readPersons().then((persons) => {
@@ -123,3 +136,6 @@ async function countPersons() {
 
 
 updateTable();
+
+
+
