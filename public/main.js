@@ -63,6 +63,7 @@ function createTableRow(id, name, age) {
     parameters.map((value, index, arr) => {
         if (index == arr.length - 1) {
             newColumn = document.createElement('td');
+            newColumn.classList.add('person__actions');
 
             const deletePersonBtn = document.createElement('button');
             deletePersonBtn.classList.add("btn", "btn-danger", "delete-user-btn");

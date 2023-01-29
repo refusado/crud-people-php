@@ -24,3 +24,21 @@
     transform: scale(1);
   }
 }
+
+table td, table th {
+  padding-right: 40px !important;
+  padding-left: 40px !important;
+}
+
+table td:nth-child(1), table th:nth-child(1) {
+  padding-left: 20px !important;
+}
+
+table td:nth-last-child(1), table th:nth-last-child(1) {
+  padding-right: 20px !important;
+}
+
+.person__actions {
+  display: flex;
+  gap: 10px;
+}
