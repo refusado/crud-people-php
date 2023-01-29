@@ -1,10 +1,9 @@
 const BASE_URL      = 'http://localhost/people-crud/api/';
 
-// const updateBtn   = document.getElementById('btnUpdate');
-const deleteBtn   = document.getElementById('delete-btn');
-const deleteAlert = document.getElementById('delete-alert');
-const deleteAll   = document.getElementById('delete-confirm');
-const deleteBack  = document.getElementById('delete-cancel');
+const deleteAllBtn      = document.getElementById('delete-btn');
+const deleteAllAlert    = document.getElementById('delete-alert');
+const deleteAllConfirm  = document.getElementById('delete-confirm');
+const deleteAllCancel   = document.getElementById('delete-cancel');
 
 const table       = document.getElementById('bodyTable');
 const countSpan   = document.getElementById('personsCount');
@@ -18,16 +17,16 @@ const ageInput    = document.getElementById('ageInput');
 //     updateTable();
 // });
 
-deleteBtn.addEventListener("click", () => {
-    deleteAlert.classList.toggle("hidden");
+deleteAllBtn.addEventListener("click", () => {
+    deleteAllAlert.classList.toggle("hidden");
 });
 
-deleteBack.addEventListener("click", () => {
-    deleteAlert.classList.add("hidden");
+deleteAllCancel.addEventListener("click", () => {
+    deleteAllAlert.classList.add("hidden");
 });
 
-deleteAll.addEventListener("click", () => {
-    deleteAlert.classList.add("hidden");
+deleteAllConfirm.addEventListener("click", () => {
+    deleteAllAlert.classList.add("hidden");
 
     countPersons().then((personsNo) => {
         if (personsNo) {
@@ -58,22 +57,51 @@ form.addEventListener('submit', e => {
 })
 
 function createTableRow(id, name, age) {
-    const params = [id, name, age];
-    const row = document.createElement('tr');
-    row.id = `person${id}`;
-
-    params.forEach(e => {
-        const col = document.createElement('td');
-        const content = document.createTextNode(e);;
-        row.appendChild(col);
-        col.appendChild(content);
-        table.appendChild(row);
-    });
+    const newRow = document.createElement('tr');
+    newRow.id = `person-${id}`;
     
+    const parameters = [id, name, age];
+
+    let newColumn;
+    parameters.push(0);
+    parameters.map((value, index, arr) => {
+        if (index == arr.length - 1) {
+            newColumn = document.createElement('td');
+
+            const deletePersonBtn = document.createElement('button');
+            deletePersonBtn.classList.add("btn", "btn-danger", "delete-user-btn");
+
+            deletePersonBtn.innerText = "delete";
+            deletePersonBtn.id = `delete-${id}`;
+            deletePersonBtn.addEventListener('click', () => {
+                console.log(id, 'to delete');
+            });
+
+            newColumn.appendChild(deletePersonBtn);
+            
+            const updatePersonBtn = document.createElement('button');
+            updatePersonBtn.classList.add("btn", "btn-primary", "edit-user-btn");
+
+            updatePersonBtn.innerText = "edit";
+            updatePersonBtn.id = `update-${id}`;
+            updatePersonBtn.addEventListener('click', () => {
+                console.log(id, 'to update');
+            });
+
+            newColumn.appendChild(updatePersonBtn);
+        } else {
+            newColumn = document.createElement('td');
+            newColumn.innerHTML = value;
+        }
+
+        newRow.appendChild(newColumn);
+    });
+
+    table.appendChild(newRow);
 }
 
 function removeTableRow(id) {
-    const rowToDelete = document.getElementById(`person${id}`);
+    const rowToDelete = document.getElementById(`person-${id}`);
 
     if (rowToDelete) {
         table.removeChild(rowToDelete);
@@ -93,6 +121,8 @@ function updateTable() {
     countPersons()
         .then(number => countSpan.textContent = number)
 }
+
+
 
 async function createPerson(name, age) {
     const result = await fetch(`${BASE_URL}?fn=create&name=${name}&age=${age}`)
@@ -135,7 +165,5 @@ async function countPersons() {
 }
 
 
+
 updateTable();
-
-
-
