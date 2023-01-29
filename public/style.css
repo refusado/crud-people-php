@@ -25,20 +25,33 @@
   }
 }
 
-table td, table th {
-  padding-right: 40px !important;
-  padding-left: 40px !important;
-}
+@keyframes unpop {
+  0% {
+    transform: scale(1);
+  }
+  
+  25% {
+    transform: scale(1.05);
+  }
 
-table td:nth-child(1), table th:nth-child(1) {
-  padding-left: 20px !important;
+  100% {
+    transform: scale(0);
+  }
 }
 
 table td:nth-last-child(1), table th:nth-last-child(1) {
-  padding-right: 20px !important;
+  padding-left: 80px !important;
+}
+
+table th:nth-last-child(1) {
+  width: 0 !important;
 }
 
 .person__actions {
   display: flex;
   gap: 10px;
+}
+
+.unpop {
+  animation: unpop 300ms forwards !important;
 }

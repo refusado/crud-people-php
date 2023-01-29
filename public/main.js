@@ -18,21 +18,44 @@ const ageInput    = document.getElementById('ageInput');
 // });
 
 deleteAllBtn.addEventListener("click", () => {
-    deleteAllAlert.classList.toggle("hidden");
+    const isHidden = deleteAllAlert.classList.contains("hidden");
+
+    if (isHidden) {
+        deleteAllAlert.classList.remove("hidden")
+    } else {
+        deleteAllAlert.classList.add("unpop");
+        
+        setTimeout(() => {
+            deleteAllAlert.classList.add("hidden");
+            deleteAllAlert.classList.remove("unpop");
+        }, 300);
+    }
+
 });
 
 deleteAllCancel.addEventListener("click", () => {
-    deleteAllAlert.classList.add("hidden");
+    deleteAllAlert.classList.add("unpop");
+    
+    setTimeout(() => {
+        deleteAllAlert.classList.add("hidden");
+        deleteAllAlert.classList.remove("unpop");
+    }, 300);
 });
 
 deleteAllConfirm.addEventListener("click", () => {
-    deleteAllAlert.classList.add("hidden");
+    deleteAllAlert.classList.add("unpop");
+    
+    setTimeout(() => {
+        deleteAllAlert.classList.add("hidden");
+        deleteAllAlert.classList.remove("unpop");
+    }, 300);
 
     countPersons().then((personsNo) => {
         if (personsNo) {
             readPersons()
-                .then(persons => persons
-                .forEach(person => removeTableRow(person.id)));
+                .then(persons => {
+                    persons.forEach(person => removeTableRow(person.id))
+                });
         }
     });
 });
@@ -68,10 +91,15 @@ function createTableRow(id, name, age) {
             const deletePersonBtn = document.createElement('button');
             deletePersonBtn.classList.add("btn", "btn-danger", "delete-user-btn");
 
-            deletePersonBtn.innerText = "delete";
+            deletePersonBtn.innerHTML = '<i class="bi bi-trash"></i>';
             deletePersonBtn.id = `delete-${id}`;
+            deletePersonBtn.title = `Remove person ${id}`;
             deletePersonBtn.addEventListener('click', () => {
-                console.log(id, 'to delete');
+                newRow.classList.toggle('unpop');
+                
+                setTimeout(() => {
+                    removeTableRow(id);
+                }, 300);
             });
 
             newColumn.appendChild(deletePersonBtn);
@@ -79,8 +107,9 @@ function createTableRow(id, name, age) {
             const updatePersonBtn = document.createElement('button');
             updatePersonBtn.classList.add("btn", "btn-primary", "edit-user-btn");
 
-            updatePersonBtn.innerText = "edit";
+            updatePersonBtn.innerHTML = 'Update';
             updatePersonBtn.id = `update-${id}`;
+            updatePersonBtn.title = `Update person ${id}`;
             updatePersonBtn.addEventListener('click', () => {
                 console.log(id, 'to update');
             });
