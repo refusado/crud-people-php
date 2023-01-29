@@ -30,13 +30,9 @@ deleteAllConfirm.addEventListener("click", () => {
 
     countPersons().then((personsNo) => {
         if (personsNo) {
-            readPersons().then((persons) => {
-                const lastPerson = persons[0].id;
-
-                for (let i = lastPerson - personsNo; i <= lastPerson; i++) {
-                    removeTableRow(i);
-                }
-            });
+            readPersons()
+                .then(persons => persons
+                .forEach(person => removeTableRow(person.id)));
         }
     });
 });
@@ -90,8 +86,12 @@ function createTableRow(id, name, age) {
 
             newColumn.appendChild(updatePersonBtn);
         } else {
-            newColumn = document.createElement('td');
-            newColumn.innerHTML = value;
+            if (value == id) {
+                newColumn = document.createElement('th');
+            } else {
+                newColumn = document.createElement('td');
+            }
+            newColumn.innerText = value;
         }
 
         newRow.appendChild(newColumn);

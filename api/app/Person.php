@@ -58,7 +58,7 @@ class Person
     {
         $conn = Connection::start();
         if ($this->getId() === 0) {
-            $stmt = $conn->prepare("SELECT * FROM person ORDER BY `person`.`id` DESC");
+            $stmt = $conn->prepare("SELECT * FROM person ORDER BY `person`.`id` ASC");
             if ($stmt->execute()) {
                 return $stmt->fetchAll(\PDO::FETCH_ASSOC);
             }

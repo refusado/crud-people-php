@@ -20,7 +20,7 @@
                     <label for="name">Name</label>
                 </div>
                 <div class="mb-3 form-floating col-md-4">
-                    <input type="number" name="age" id="ageInput" class="form-control" placeholder="Age">
+                    <input type="number" name="age" id="ageInput" max="200" class="form-control" placeholder="Age">
                     <label for="age">Age</label>
                 </div>
                 <div>
@@ -46,19 +46,52 @@
                 <button type="button" id="delete-cancel" class="btn btn-success">Cancel</button>
             </div>
 
-            <table class="table table-hover table-borderless">
-                <thead class="border-bottom">
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Age</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="bodyTable" class="">
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-hover table-borderless w-auto">
+                    <thead class="border-bottom">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bodyTable" class="">
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+        <table class="table my-4 border border-1">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th colspan="2">First</th>
+                <th>Last</th>
+                <th>Handle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>1</th>
+                <td colspan="2">Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th>2</th>
+                <td colspan="2">Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th>3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+                <td>@twitter</td>
+              </tr>
+            </tbody>
+          </table>
     </main>
 </body>
 </html>
