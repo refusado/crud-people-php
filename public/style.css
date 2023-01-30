@@ -2,13 +2,12 @@
   animation: pop 300ms forwards;
 }
 
-#delete-alert {
-  display: flex;
+.pop {
   animation: pop 300ms forwards;
 }
 
-#delete-alert.hidden {
-  display: none;
+.unpop {
+  animation: unpop 300ms forwards !important;
 }
 
 @keyframes pop {
@@ -50,8 +49,4 @@ table th:nth-last-child(1) {
 .person__actions {
   display: flex;
   gap: 10px;
-}
-
-.unpop {
-  animation: unpop 300ms forwards !important;
 }

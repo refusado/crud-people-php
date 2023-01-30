@@ -8,36 +8,36 @@ const deleteAllCancel   = document.getElementById('delete-cancel');
 const table       = document.getElementById('bodyTable');
 const countSpan   = document.getElementById('personsCount');
 
-const form        = document.getElementById('crudForm');
+const createForm  = document.getElementById('crudForm');
 const nameInput   = document.getElementById('nameInput');
 const ageInput    = document.getElementById('ageInput');
 
-// updateBtn.addEventListener('click', () => {
-//     updatePerson(7, 'Carlos Drumond', 73);
-//     updateTable();
-// });
+const updateBox     = document.getElementById('update-container');
+const updateForm    = document.getElementById('update-form');
+const newNameInput  = document.getElementById('nameUpdateInput');
+const newAgeInput   = document.getElementById('ageUpdateInput');
+const uptaderId     = document.getElementById('updateId');
 
 deleteAllBtn.addEventListener("click", () => {
-    const isHidden = deleteAllAlert.classList.contains("hidden");
+    const isHidden = deleteAllAlert.classList.contains("d-none");
 
     if (isHidden) {
-        deleteAllAlert.classList.remove("hidden")
+        deleteAllAlert.classList.remove("d-none")
     } else {
         deleteAllAlert.classList.add("unpop");
         
         setTimeout(() => {
-            deleteAllAlert.classList.add("hidden");
+            deleteAllAlert.classList.add("d-none");
             deleteAllAlert.classList.remove("unpop");
         }, 300);
     }
-
 });
 
 deleteAllCancel.addEventListener("click", () => {
     deleteAllAlert.classList.add("unpop");
     
     setTimeout(() => {
-        deleteAllAlert.classList.add("hidden");
+        deleteAllAlert.classList.add("d-none");
         deleteAllAlert.classList.remove("unpop");
     }, 300);
 });
@@ -46,7 +46,7 @@ deleteAllConfirm.addEventListener("click", () => {
     deleteAllAlert.classList.add("unpop");
     
     setTimeout(() => {
-        deleteAllAlert.classList.add("hidden");
+        deleteAllAlert.classList.add("d-none");
         deleteAllAlert.classList.remove("unpop");
     }, 300);
 
@@ -60,7 +60,7 @@ deleteAllConfirm.addEventListener("click", () => {
     });
 });
 
-form.addEventListener('submit', e => {
+createForm.addEventListener('submit', e => {
     e.preventDefault();
     const name  = nameInput.value || "Default";
     const age   = ageInput.value || 0;
@@ -112,6 +112,11 @@ function createTableRow(id, name, age) {
             updatePersonBtn.title = `Update person ${id}`;
             updatePersonBtn.addEventListener('click', () => {
                 console.log(id, 'to update');
+                updateBox.classList.remove('d-none');
+
+                newNameInput.value = name;
+                newAgeInput.value = age;
+                uptaderId.value = id;
             });
 
             newColumn.appendChild(updatePersonBtn);
@@ -129,6 +134,24 @@ function createTableRow(id, name, age) {
 
     table.appendChild(newRow);
 }
+
+updateForm.addEventListener('submit', e => {
+    e.preventDefault();
+    updateBox.classList.add('d-none');
+
+    const newName = newNameInput.value || "Default";
+    const newAge = newAgeInput.value || 0;
+    const register = uptaderId.value || 0;
+
+    console.log("novo nome: ", newName);
+    console.log("nova idade: ", newAge);
+    console.log("id do registro: ", register);
+
+    if (register) {
+        updatePerson(register, newName, newAge)
+            .then(() => updateTable());
+    }
+});
 
 function removeTableRow(id) {
     const rowToDelete = document.getElementById(`person-${id}`);
